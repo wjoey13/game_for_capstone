@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour {
 
     Transform player;
-    //PlayerHealth playerHealth;
+    PlayerHealth playerHealth;
     //EnemyHealth enemyHealth;
     UnityEngine.AI.NavMeshAgent nav;
 
@@ -24,7 +24,7 @@ public class EnemyController : MonoBehaviour {
 		
         //if(enemyHealth.currentHealth > 0 && playerHealth.currentHealth > 0)
         //{
-            nav.SetDestination (player.position);
+            nav.SetDestination(player.position);
         //}
         //else 
         //{

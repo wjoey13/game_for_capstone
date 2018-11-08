@@ -76,6 +76,10 @@ public class PlayerController : MonoBehaviour {
         {
             state = State.Fall;
         }
+        if(Input.GetButton("Fire1"))
+        {
+            state = State.Attack;
+        }
 
     }
 
