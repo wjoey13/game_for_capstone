@@ -8,27 +8,58 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] float gravity;
     [SerializeField] float jumpSpeed;
     [SerializeField] float fallControl;
+
+    public enum State
+    {
+        Idle,
+        Run,
+        Jump,
+        Fall,
+        Death
+    }
+    [SerializeField] public State state;
+
     public Rigidbody playerRigidbody;
     public int floorMask;
     public float camRayLength = 100f;
 
     Vector3 moveDirection;
     CharacterController characterController;
+    AnimationController animationController;
     // Use this for initialization
     void Start () {
         characterController = GetComponent<CharacterController>();
+        animationController = FindObjectOfType<AnimationController>();
         floorMask = LayerMask.GetMask("Floor");
         playerRigidbody = GetComponent<Rigidbody>();
 	}
-	
-	// Update is called once per frame
-	void FixedUpdate () {
+
+    // Update is called once per frame
+    void FixedUpdate()
+    {
+        MovementHandling();
+        AnimationHandling();
+    }
+
+    private void MovementHandling()
+    {
         Vector3 moveInput = new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
-        if (characterController.isGrounded) 
+        if (characterController.isGrounded)
         {
-            moveDirection = moveInput;
-            moveDirection *= moveSpeed;
-            if(Input.GetButton("Jump")){
+            if (Input.GetAxis("Horizontal") == 0 && Input.GetAxis("Vertical") == 0)
+            {
+                state = State.Idle;
+                moveDirection = new Vector3(0, 0.0f, 0);
+            }
+            else
+            {
+                moveDirection = moveInput;
+                moveDirection *= moveSpeed;
+                state = State.Run;
+            }
+            if (Input.GetButton("Jump"))
+            {
+                state = State.Fall;
                 moveDirection.y = jumpSpeed;
             }
         }
@@ -39,22 +70,39 @@ public class PlayerController : MonoBehaviour {
         moveDirection.y -= gravity * Time.deltaTime;
 
         characterController.Move(moveDirection * Time.deltaTime);
-        //Turning(); 
-	}
 
-    //void Turning()
-    //{
-    //    Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (!characterController.isGrounded)
+        {
+            state = State.Fall;
+        }
+    }
 
-    //    RaycastHit floorHit;
-
-    //    if (Physics.Raycast(camRay, out floorHit, camRayLength,floorMask))
-    //    {
-    //        Vector3 playerToMouse = floorHit.point - transform.position;
-    //        playerToMouse.y = 0f;
-
-    //        Quaternion newRotation = Quaternion.LookRotation(playerToMouse);
-    //        playerRigidbody.MoveRotation(newRotation);
-    //    }
-    //}
+    private void AnimationHandling()
+    {
+        if (state == State.Idle)
+        {
+            animationController.stateUpdate("Idle");
+        }
+        else if (state == State.Run)
+        {
+            animationController.stateUpdate("Run");
+        }
+        else if (state == State.Jump)
+        {
+            animationController.stateUpdate("Jump");
+        }
+        else if (state == State.Fall)
+        {
+            animationController.stateUpdate("Fall");
+        }
+        else if (characterController.isGrounded)
+        {
+            animationController.StopFalling();
+            animationController.AnimStop();
+        }
+        else if (state == State.Death)
+        {
+            animationController.stateUpdate("Death");
+        }
+    }
 }

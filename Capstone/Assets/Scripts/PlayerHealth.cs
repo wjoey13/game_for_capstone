@@ -9,11 +9,14 @@ public class PlayerHealth : MonoBehaviour {
     public int currentHealth;
     public Slider healthSlider;
 
+    AnimationController animationController;
     PlayerController playerController;
     bool isDead;
     bool damaged;
 	// Use this for initialization
 	void Awake() {
+
+        animationController = FindObjectOfType<AnimationController>();
         playerController = GetComponent<PlayerController>();
 
 
@@ -42,7 +45,7 @@ public class PlayerHealth : MonoBehaviour {
     void Death()
     {
         isDead = true;
-
+        animationController.stateUpdate("Death");
         playerController.enabled = false;
     }
 }
