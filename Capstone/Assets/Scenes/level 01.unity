@@ -8924,20 +8924,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &1019131609
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1019131604}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6432754361ebb4c91ba9f1620cdde975, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damagePerSwing: 25
-  timeBetweenSwings: 0.15
-  range: 100
 --- !u!1 &1032065882
 GameObject:
   m_ObjectHideFlags: 0
@@ -16629,6 +16615,11 @@ Prefab:
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114971191941567130, guid: 416af391d44a9f745889399554e08f1e,
+        type: 2}
+      propertyPath: gravity
+      value: 50
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 136202336618529518, guid: 416af391d44a9f745889399554e08f1e, type: 2}
     - {fileID: 95298662992195220, guid: 416af391d44a9f745889399554e08f1e, type: 2}
@@ -18057,7 +18048,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 45, y: 45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1971804218
 MonoBehaviour:
@@ -18078,7 +18069,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: d3cf60b6749db4a08bc390e13b913845, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
