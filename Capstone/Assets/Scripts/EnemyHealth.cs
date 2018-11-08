@@ -30,7 +30,7 @@ public class EnemyHealth : MonoBehaviour {
         }
 	}
 
-    public void TakeDamage (int amount)
+    public void TakeDamage (int amount /* Vector3 hitPoint */)
     {
         if (isDead)
 
