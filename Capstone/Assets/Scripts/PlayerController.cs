@@ -15,7 +15,8 @@ public class PlayerController : MonoBehaviour {
         Run,
         Jump,
         Fall,
-        Death
+        Death,
+        Attack
     }
     [SerializeField] public State state;
 
@@ -75,6 +76,7 @@ public class PlayerController : MonoBehaviour {
         {
             state = State.Fall;
         }
+
     }
 
     private void AnimationHandling()
@@ -90,6 +92,10 @@ public class PlayerController : MonoBehaviour {
         else if (state == State.Jump)
         {
             animationController.stateUpdate("Jump");
+        }
+        else if (state == State.Attack)
+        {
+            animationController.stateUpdate("Attack");
         }
         else if (state == State.Fall)
         {
