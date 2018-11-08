@@ -30,6 +30,10 @@ public class AnimationController : MonoBehaviour
         {
             anim.SetInteger("state", 2);
         }
+        else if (currentState.Equals("Attack"))
+        {
+            anim.SetInteger("state", 3);
+        }
         else if (currentState.Equals("Death"))
         {
             anim.SetBool("isDead", true);
